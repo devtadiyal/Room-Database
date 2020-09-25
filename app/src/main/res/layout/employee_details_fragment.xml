@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.recodesave.viewmodel.EmployeeDetailsViewModel" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent"
+        >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="MedRec Technologies"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Add New Employee Recode"
+                android:textColor="@android:color/white"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:background="@drawable/button"
+                android:layout_width="match_parent"
+                android:textColor="@android:color/white"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:textSize="13dp"
+                android:text="@={viewModel.name}"
+                android:maxLength="30"
+                android:textColorHint="@android:color/white"
+                android:hint="Employee Name" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:background="@drawable/button"
+                android:layout_width="match_parent"
+                android:textColor="@android:color/white"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:textSize="13dp"
+                android:text="@={viewModel.email}"
+                android:maxLength="30"
+                android:textColorHint="@android:color/white"
+                android:hint="Employee Email" />
+
+            <EditText
+                android:id="@+id/editTextMobile"
+                android:background="@drawable/button"
+                android:layout_width="match_parent"
+                android:textColor="@android:color/white"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:textSize="13dp"
+                android:text="@={viewModel.number}"
+                android:maxLength="30"
+                android:digits="0123456789"
+                android:inputType="number"
+                android:textColorHint="@android:color/white"
+                android:hint="Employee Phone No" />
+
+            <EditText
+                android:id="@+id/editTextAddress"
+                android:background="@drawable/button"
+                android:layout_width="match_parent"
+                android:textColor="@android:color/white"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:textSize="13dp"
+                android:text="@={viewModel.address}"
+                android:maxLength="30"
+                android:textColorHint="@android:color/white"
+                android:hint="Employee Address" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="6dp"
+                android:textSize="13dp"
+                android:textColor="@android:color/white"
+                android:text="Select Department" />
+
+            <Spinner
+                android:id="@+id/spinnerDepartment"
+                android:layout_width="match_parent"
+                android:theme="@style/Spinner"
+                android:background="@drawable/button"
+                android:layout_height="40dp"
+                android:entries="@{ viewModel.items }"
+                android:selectedItemPosition="@={ viewModel.itemPosition }"
+                android:textColor="@android:color/white"
+               />
+
+            <EditText
+                android:id="@+id/editTextSalary"
+                android:background="@drawable/button"
+                android:layout_width="match_parent"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="13dp"
+                android:text="@={viewModel.salary}"
+                android:maxLength="7"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:digits="0123456789"
+                android:inputType="number"
+                android:layout_marginTop="10dp"
+                android:hint="Employee Salary"
+                />
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:background="@drawable/button"
+                android:layout_width="match_parent"
+                android:textColor="@android:color/white"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:textSize="13dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:text="@={viewModel.date}"
+                android:onClick="@{viewModel::openCalender}"
+                android:layout_marginTop="10dp"
+                android:digits="0123456789"
+                android:textColorHint="@android:color/white"
+                android:hint="Employee Joining Date"
+                android:inputType="number"/>
+
+            <Button
+                android:id="@+id/buttonAddEmployee"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:onClick="@{viewModel::saveDetails}"
+                android:textColor="@android:color/white"
+                android:background="@android:color/holo_blue_light"
+                android:text="Add Employee" />
+
+            <Button
+                android:id="@+id/textViewViewEmployees"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/white"
+                android:background="@android:color/holo_blue_light"
+                android:text="Employees Recodes"
+                android:onClick="@{viewModel::openListFragment}"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    </ScrollView>
+</layout>
