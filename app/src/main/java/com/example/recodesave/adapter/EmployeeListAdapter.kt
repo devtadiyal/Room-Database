@@ -1,5 +1,6 @@
 package com.example.recodesave.adapter
 
+import android.R.attr.data
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,8 +9,7 @@ import com.example.recodesave.R
 import com.example.recodesave.databinding.ListLayoutEmployeeBinding
 import com.example.recodesave.roomdb.User
 import com.example.recodesave.utils.RecyclerViewClickListener
-import com.example.recodesave.view.EmployeeDetailsFragmentDirections
-import com.example.recodesave.view.EmployeesListFragmentDirections
+
 
 class EmployeeListAdapter(
     private var user: MutableList<User>,
@@ -28,11 +28,20 @@ class EmployeeListAdapter(
             )
         )
 
-    fun update(position: Int){
+    fun delete(position: Int){
         user.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemRangeChanged(position,user.size)
+        notifyItemRangeChanged(position, user.size)
     }
+
+    fun update(position: Int,newUser:User){
+        val newValue = newUser
+        val updateIndex = position
+        user.set(updateIndex, newValue)
+        notifyItemChanged(updateIndex)
+        notifyDataSetChanged()
+    }
+
 
     override fun onBindViewHolder(holder: EmployeesListViewModel, position: Int) {
         holder.recyclerviewMovieBinding.user = user[position]
@@ -46,9 +55,10 @@ class EmployeeListAdapter(
         }
         holder.recyclerviewMovieBinding.buttonEditEmployee.setOnClickListener {
              listener.onRecyclerViewItemClick(
-                holder.recyclerviewMovieBinding.buttonEditEmployee,
-                position,
-                user.get(position))
+                 holder.recyclerviewMovieBinding.buttonEditEmployee,
+                 position,
+                 user.get(position)
+             )
         }
     }
 

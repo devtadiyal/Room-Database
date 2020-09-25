@@ -28,7 +28,16 @@
                 android:orientation="vertical"
                 android:padding="5dp">
 
+                <TextView
+                    android:id="@+id/textViewId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@{`Employee Id : ` + user.id}"
+                    android:textColor="@android:color/holo_blue_dark"
 
+                    />
+                
                 <TextView
                     android:id="@+id/textViewName"
                     android:layout_width="match_parent"

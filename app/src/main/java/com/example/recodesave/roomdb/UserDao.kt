@@ -15,9 +15,7 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(vararg user: User)
 
-
     @Query("SELECT * FROM employee ORDER BY id DESC")
     fun getList(): List<User>
-
 
 }

@@ -78,7 +78,8 @@ class EmployeeDetailsViewModel(private val repository: UserRepository) : ViewMod
             toast(view, "Address should not be empty...")
         } else {
             viewModelScope.launch {
-                var user = User(name = name!!,
+                var user = User(
+                        name = name!!,
                     email = email!!,
                     salary = salary!!,
                     address = address!!,

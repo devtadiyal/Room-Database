@@ -68,7 +68,7 @@ class EmployeesListFragment : Fragment(), KodeinAware, RecyclerViewClickListener
                 ) { arg0, arg1 ->
                     viewLifecycleOwner.lifecycleScope.launch {
                         AppDatabase(requireContext()).getUserDao().deleteUser(user)
-                        adapter.update(position)
+                        adapter.delete(position)
                     }
                 }
                 alertbox.setNegativeButton(
@@ -79,7 +79,6 @@ class EmployeesListFragment : Fragment(), KodeinAware, RecyclerViewClickListener
             }
             R.id.buttonEditEmployee -> {
                 updateEmployee(user,position)
-               // Toast.makeText(requireContext(), "Like Layout Clicked", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -112,7 +111,9 @@ class EmployeesListFragment : Fragment(), KodeinAware, RecyclerViewClickListener
             val date = editTextDate.text.toString().trim { it <= ' ' }
             val salary = editTextSalary.text.toString().trim { it <= ' ' }
             val dept = spinnerDepartment.selectedItem.toString()
-            var user = User(name = name!!,
+
+            var mUser = User(
+                name = name!!,
             email = email!!,
             salary = salary!!,
             address = address!!,
@@ -150,9 +151,12 @@ class EmployeesListFragment : Fragment(), KodeinAware, RecyclerViewClickListener
                 editTextSalary.requestFocus()
                 return@OnClickListener
             }
+
             viewLifecycleOwner.lifecycleScope.launch {
-               AppDatabase(requireContext()).getUserDao().updateUser(user)
+                 mUser.id = user.id
+                AppDatabase(requireContext()).getUserDao().updateUser(mUser)
                 Toast.makeText(context,"Data Updated...",Toast.LENGTH_SHORT).show()
+                adapter.update(position,mUser)
             }
             dialog.dismiss()
         })
